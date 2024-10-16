@@ -34,3 +34,6 @@ Route::name('job')->prefix('job')->group(function () {
     Route::get('home', function (){ return 'Job home page'; })->name('.home');
     Route::get('details', function (){ return 'Job details are following'; })->name('.description');
 });
+
+// nak bg arahan pada laravel utk baca route web.php dari folder routes->feed
+require __DIR__.'/feed/web.php';
