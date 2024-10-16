@@ -1,11 +1,16 @@
 @extends('layouts.main')
 
-@section('title', 'Sign In')
+@section('title', 'Feed List')
 
 @section('content')
 
 <div class="container">
     <form>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name">
+            <div id="email" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
     
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
@@ -18,7 +23,7 @@
           <input type="password" class="form-control" id="password" name="password">
         </div>
     
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Login</button>
       </form>
 </div>
 
