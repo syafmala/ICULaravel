@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'View Feed')
+@section('title', 'Create Feed')
 
 @section('content')
 
