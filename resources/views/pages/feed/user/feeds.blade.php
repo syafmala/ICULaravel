@@ -30,6 +30,21 @@
         @foreach ($feeds as $feed )
         <div class="card mb-3" style="width: 50%;">
             <div class="card-body">
+                <ul class="list-group
+                        list-group-horizontal
+                        mb-3"
+                    >
+                    @foreach ($feed->tags as $tag)
+                    @if ($tag->pivot->isActive)
+                        <li class="list-group
+                            list-group-horizontal
+                            me-2"
+                        >
+                            <span class="badge bg-primary">{{ $tag->name }}</span>
+                        </li>
+                    @endif
+                    @endforeach
+                </ul>
             <h5 class="card-title">{{ $feed->title }}</h5>
             <p class="card-text">{{ $feed->description }}</p>
             </div>

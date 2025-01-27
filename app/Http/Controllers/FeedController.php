@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feed;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -25,23 +26,32 @@ class FeedController extends Controller
         return view('pages.feed.show', compact('feed'));
     }
 
+    // public function create(){
+    //     $tags = Tag::all();
+    //     return view('pages.feed.create');
+    // }
+
     public function create(){
-        return view('pages.feed.create');
+        $tags = Tag::all();
+        return view('pages.feed.create', compact('tags'));
     }
+    
 
     public function store(Request $request){
         $validated_request = $request->validate([
             'title' => 'required | string | max:100',
             'description' => 'required | string | max:300',
+            'tags' => 'required | array',
         ]);
 
         //ORM
         // add a user id to the $validated_request
         $user = Auth::user();
         $validated_request['user_id'] = $user->id;
-        //$validated_request['user_id'] = 1;
-        Feed::create($validated_request);
-        return redirect()->route('feeds')->with('success','Feed created successfully!');
+        
+        $feed=Feed::create($validated_request);
+        $feed->tags()->attach($validated_request['tags']);
+        return redirect()->route('feeds')->with('success', 'Feed created successfully');
     }
 
     public function update(Request $request, Feed $feed){
@@ -51,6 +61,8 @@ class FeedController extends Controller
         ]);
 
         $feed->update($validated_request);
+        $feed->tags()->attach($validated_request['tags']);
+        
         return redirect()->route('feeds');
     }
 

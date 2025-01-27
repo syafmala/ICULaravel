@@ -38,6 +38,8 @@ Route::name('job')->prefix('job')->group(function () {
 
 // nak bg arahan pada laravel utk baca route web.php dari folder routes->feed
 require __DIR__.'/feed/web.php';
+require __DIR__.'/tag/web.php';
 require __DIR__.'/auth/web.php';
 
 Route::get('/ai/feed', [AIController::class, 'generateAIPage'])->name('ai.feed');
+

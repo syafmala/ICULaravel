@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\FeedController;
-
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/feeds', function () { return view('pages.feed.index'); })->name('feeds');

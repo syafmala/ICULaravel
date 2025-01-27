@@ -13,6 +13,9 @@
                 </li>
                 @auth
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('tags') }}">Tags</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('feeds') }}">Feeds</a>
                 </li>
                 <li class="nav-item">
