@@ -54,4 +54,10 @@ class FeedController extends Controller
         return redirect()->route('feeds');
     }
 
+    public function userFeeds(){
+        $user = Auth::user();
+        $feeds = $user->feeds()->paginate(1);
+
+        return view('pages.feed.user.feeds', compact('feeds'));
+    }
 }

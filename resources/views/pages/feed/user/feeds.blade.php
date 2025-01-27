@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'My Feeds')
+@section('title', 'Feed List')
 
 @section('content')
     {{-- {{ dd($feeds) }} --}}

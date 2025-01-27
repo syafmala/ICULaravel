@@ -13,5 +13,7 @@ Route::middleware(['auth','log-request'])->group(function(){
 
     Route::get('/feed/show/{feed}', [FeedController::class, 'show'])->name('feed.show');
     Route::put('/feed/update/{feed}', [FeedController::class, 'update'])->name('feed.update');
+
+    Route::get('/feeds/user', [FeedController::class, 'userFeeds'])->name('feeds.user');
 });
 //Route::get('/ai/feed', [AIController::class, 'generateFeedContent'])->name('ai.feed');
