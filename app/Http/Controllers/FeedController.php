@@ -18,18 +18,12 @@ class FeedController extends Controller
         return view('pages.feed.index', compact('feeds'));
     }
 
-    public function show(Feed $feed){
-
-        //dd($feed);
-        //Log::debug("Show feed", [ 'feed' =>$feed ]);
+    public function show(Feed $feed)
+    {
         Gate::authorize('update', $feed);
-        return view('pages.feed.show', compact('feed'));
+        $tags = Tag::all();
+        return view('pages.feed.show', compact('feed','tags'));
     }
-
-    // public function create(){
-    //     $tags = Tag::all();
-    //     return view('pages.feed.create');
-    // }
 
     public function create(){
         $tags = Tag::all();
@@ -48,22 +42,26 @@ class FeedController extends Controller
         // add a user id to the $validated_request
         $user = Auth::user();
         $validated_request['user_id'] = $user->id;
-        
+
         $feed=Feed::create($validated_request);
         $feed->tags()->attach($validated_request['tags']);
         return redirect()->route('feeds')->with('success', 'Feed created successfully');
     }
 
-    public function update(Request $request, Feed $feed){
-        $validated_request = $request->validate([
+    public function update(Request $request, Feed $feed)
+    {
+        $feed->update($this->validateRequest($request));
+        $feed->tags()->sync($request->tags);
+        return redirect()->route('feeds')->with('success', 'Feed updated successfully!');;
+    }
+
+    private function validateRequest(Request $request)
+    {
+        return $request->validate([
             'title' => 'required | string | max:100',
             'description' => 'required | string | max:300',
+            'tags' => 'required | array',
         ]);
-
-        $feed->update($validated_request);
-        $feed->tags()->attach($validated_request['tags']);
-        
-        return redirect()->route('feeds');
     }
 
     public function userFeeds(){

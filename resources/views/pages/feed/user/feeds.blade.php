@@ -23,7 +23,7 @@
         </div>
             
         @endif
-        <h1>Feed Listing</h1>
+        <h1>My Feeds</h1>
 
         <a type="button" class="btn btn-primary mb-3" href="{{ route('feed.create') }}">New Feed</a>
         
@@ -45,12 +45,14 @@
                     @endif
                     @endforeach
                 </ul>
-            <h5 class="card-title">{{ $feed->title }}</h5>
-            <p class="card-text">{{ $feed->description }}</p>
+            <h5 class="card-title">{{$feed->id}} | {{ $feed->title }}</h5>
+            <p class="card-text">{{ $feed->upperCaseDescription }}</p>
+            <!-- <button type="submit" class="btn btn-primary">View</button> -->
+            <a type="submit" class="btn btn-secondary" href="{{ route('feed.show', $feed->id) }}">View</a>
             </div>
         </div>
         @endforeach    
-
+        
         <div class="d-flex justify-content-start">
             {{ $feeds->links() }}
         </div>
